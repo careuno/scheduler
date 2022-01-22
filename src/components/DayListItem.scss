@@ -1,0 +1,53 @@
+@import "styles/mixins.scss";
+@import "styles/variables.scss";
+
+
+/* This is SCSS syntax that creates styles for the classes
+
+.day-list__item
+.day-list__item--selected
+.day-list__item--full 
+
+
+NOT 
+.day-list__item
+.--selected
+.--full
+
+so when you write in your DayListItem.js file, and use the classnames package, you need to make sure the style that is reflected after it's evaluated with the classname package as <li .day-list__item .day-list__item--selected> NOT
+<li .day-list__item --selected>
+
+*/
+
+.day-list {
+  &__item {
+    @include fade;
+
+    color: #8395a7;
+    height: 5rem;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:hover {
+      background-color: #ee5253;
+      cursor: pointer;
+      color: $dark-background;
+    }
+
+    &--selected {
+      background-color: darken($white, 5%);
+      color: $dark-background;
+
+      &:hover {
+        background-color: darken($white, 5%);
+      }
+    }
+
+    &--full {
+      opacity: $inactive-opacity;
+    }
+  }
+}
+
