@@ -1,26 +1,56 @@
 import { useCallback, useState } from "react";
 
-export const getAppointmentsForDay = (state, day) => {
-  const filteredDays = state.days.filter(oneDay => {
-    return oneDay.name === day//returns an obj where the name matches so you can access the appointments array
+export const getAppointmentsForDay = (state, dayName) => {
+ // console.log('state in getAppointmentsForDay------>', state)
+  const dayObj = state.days.find(oneDay => {
+    return oneDay.name === dayName//returns an obj where the name matches , obj for Monday
   });
+
+  if (!dayObj) {
+    return [];
+  }
+  
+  // const resultArray =[];
+  // for (const id of dayObj.appointments) {
+  //   const appointment = state.appointments[id];
+  //   resultArray.push(appointment);
+  // }
+
+//return result array
+  const result = dayObj.appointments.map((id)=> state.appointments[id]);
+  return result;
+
+};
+
+export const getInterviewersForDay = (state, dayName) => {
+  // console.log('state in getAppointmentsForDay------>', state)
+   const dayObj = state.days.find(oneDay => {
+     return oneDay.name === dayName//returns an obj where the name matches, obj for Monday
+   });
+ 
+   if (!dayObj) {
+     return [];
+   }
+   
+ //return result array
+   const result = dayObj.interviewers.map((id)=> state.interviewers[id]);
+   return result;
+ 
+ };
+
+
+
+
+
+
+
 //console.log('filteredDays----------->',filteredDays)
 //console.log('day----------->',day)
-const resultArray =[];
-if (filteredDays.length === 0) {
-  return resultArray;
-} else {
-  const appointmentSlots = filteredDays[0]['appointments']
-  for (const slot of appointmentSlots) {
-      resultArray.push(state.appointments[slot]) //slot is a number type, and the keys on appointments are "1"  or "2" and it works here cause you are putting the number as a key, and it's coerced into a sting type to evaluate. BUT if you do if (slot === id) it will stop type coercion and evaluate to FALSE. 
-  }
-}
 
 //appointmentSlots.map((x)=>state.appointments[x]); //x is referring to an element in the appointmentSlots array. YOU CAN DO MAP INSTEAD OF establishing an empty array but you'd have to rewrite your condition for empty strings. 
 
 
-return resultArray;
-};
+
 
 
 
@@ -37,6 +67,15 @@ export const getInterview = (state, interview) => {
     return interviewObj;
   }
 };
+
+
+
+
+
+
+
+
+
 
 /* 
 The function should return a new object containing the interview data when we pass it an object that contains the interviewer. Otherwise, the function should return null. The object it returns should look like this:
