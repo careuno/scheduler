@@ -8,10 +8,46 @@ import "./styles.scss";
 import Header from "./Header.js";
 import Empty from "./Empty.js";
 import Show from "./Show.js";
+import Form from "./Form.js";
+import useVisualMode from 'hooks/useVisualMode';
+
 
 
 export default function Appointment(props) {
-const {time, id, interview} = props
+  // MODES : 
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+  const CREATE = "CREATE";
+
+  const {time, id, interview, onCancel} = props
+  const {mode, transition, back, history} = useVisualMode(interview ? SHOW : EMPTY)
+  console.log('interview prop-------', interview)
+  const interviewers = [];
+  return (
+  
+  <article className="appointment">
+    <Header time={time}/>
+    {/* CAN'T USE THIS ANYMORE CAUSE WE NEED TO SUPPORT MORE THAN TWO VIEWS{interview ? <Show student={interview.student} interviewer={interview.interviewer}/> : <Empty/>} */}
+    {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+    {mode === SHOW && (
+     <Show
+    student={interview.student}
+    interviewer={interview.interviewer}
+    />)}  
+    {mode === CREATE && (
+     <Form
+      interviewers={interviewers}
+      onCancel={back}
+    />)}  
+  </article> 
+  
+  );
+
+};
+
+
+/*     {time && `Appointment at ${time}`}
+    {!time && 'No Appointments'} */
 
 // Option 2: works
 // const appointmentMsg = <article className="appointment">Appointment at {time}</article>
@@ -33,21 +69,7 @@ const {time, id, interview} = props
      {interview && <Show/>}
     {!interview && <Empty/>} */
 
-  return (
-  
-  <article className="appointment">
-    <Header time={time}/>
-    {interview ? <Show student={interview.student} interviewer={interview.interviewer}/> : <Empty/>}
-{/*     {time && `Appointment at ${time}`}
-    {!time && 'No Appointments'} */}
-  </article> 
-  
-  
-//So you don't need {} wrapped around this because it's evaluating directly with JSX
+  //So you don't need {} wrapped around this because it's evaluating directly with JSX
   
   // time ? <article className="appointment">Appointment at {time}</article>
   // : <article className="appointment">No Appointments</article>
-
-  );
-
-};
