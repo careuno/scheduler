@@ -40,12 +40,8 @@ const back = function() {
   } 
   return
  }
- 
-
 
 return {mode, transition, back, history};
-
-  
 };
 
 export default useVisualMode;
