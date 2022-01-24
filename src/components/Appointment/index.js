@@ -19,10 +19,10 @@ export default function Appointment(props) {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
 
-  const {time, id, interview, onCancel} = props
+  const {time, id, interview, onCancel, interviewers} = props
   const {mode, transition, back, history} = useVisualMode(interview ? SHOW : EMPTY)
   console.log('interview prop-------', interview)
-  const interviewers = [];
+ // const interviewers = [];
   return (
   
   <article className="appointment">
