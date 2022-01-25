@@ -23,6 +23,7 @@ onCancel:Function
 
 export default function Form(props) {
   const {studentName, interviewers, interviewerID, onSave, onCancel} = props;
+  console.log('studentName------>', studentName)
   const [student, setStudent] = useState(studentName || '')
   const [interviewer, setInterviewer] = useState(interviewerID || null)
   console.log('student---->', student)
