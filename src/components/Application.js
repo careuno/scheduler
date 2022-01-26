@@ -12,9 +12,18 @@ import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
   //If you are looking for top level behaviour,state/actions, it's moved to hook/useApplicationData.js
-  
+
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
+
+    // WHAT STATE LOOKS LIKE
+    // const [state, setState] = useState({
+    //   day: "Monday",
+    //   days: [],
+    //   // you may put the line below, but will have to remove/comment hardcoded appointments variable
+    //   appointments: {}, 
+    //   interviewers: {}
+    // });
 
   const interviewers = getInterviewersForDay(state, state.day);
   const appointments = getAppointmentsForDay(state, state.day);
