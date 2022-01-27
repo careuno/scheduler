@@ -117,7 +117,6 @@ storiesOf("InterviewerListItem", module)
   ))
   .add("Clickable", () => (
     <InterviewerListItem
-      // id={interviewer.id} //no longer needed after refactoring component https://web.compass.lighthouselabs.ca/days/w07d3/activities/1207
       name={interviewer.name}
       avatar={interviewer.avatar}
       setInterviewer={action("setInterviewer")(interviewer.id)}
@@ -142,22 +141,7 @@ storiesOf("InterviewerList", module)
       interviewers={interviewers}
     />
   ))
-  /* Before we renamed our props in InterviewList to prepare for storing interviewer obj in state */
-    /* INTERVIEWER changes to VALUE and SETINTERVIEW changes to ONCHANGE */
-  /*   .add("Selected", () => (
-    <InterviewerList
-      interviewers={interviewers}
-      interviewer={3}
-    /> 
     
-      .add("Clickable", () => (
-    <InterviewerList
-      interviewers={interviewers}
-      setInterviewer={action("setInterviewer")}
-    />
-  ));
-    
-    */
   .add("Selected", () => (
     <InterviewerList
       interviewers={interviewers}

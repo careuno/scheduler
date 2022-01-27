@@ -1,34 +1,14 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import InterviewerList from "../InterviewerList";
-//https://web.compass.lighthouselabs.ca/days/w07d3/activities/1209
 
-/* 
-The Form component should track the following state:
-
-student:String
-interviewer:Number
-The Form component should have the following actions:
-
-setStudent:Function
-setInterviewer:Function
-The Form component should take the following props:
-
-student:String
-interviewers:Array
-interviewer:Number
-onSave:Function
-onCancel:Function 
-*/
 
 export default function Form(props) {
   const {studentName, interviewers, interviewerID, onSave, onCancel} = props;
-  //console.log('studentName------>', studentName)
   const [student, setStudent] = useState(studentName || '')
   const [interviewer, setInterviewer] = useState(interviewerID || null)
   const [error, setError] = useState("")
-  //console.log('student---->', student)
-  //console.log('interviewer---->', interviewer)
+
 
   const reset= () => {
     setStudent('');
@@ -48,6 +28,15 @@ export default function Form(props) {
       setError("Student name cannot be blank");
       return;
     }
+
+   
+    //STRETCH: For future implementation, must update JEST test
+    // if (!interviewer) {
+    //   setError("Must select interviewer.");
+    //   return;
+    // }
+
+
     onSave(student, interviewer);
     setError("")
   }
@@ -71,7 +60,6 @@ export default function Form(props) {
           interviewers={interviewers}
           value={interviewer} 
           onChange={setInterviewer}
-          /* why is it not this ??? onChange={()=> setInterviewer} */
         />
       </section>
       <section className="appointment__card-right">
@@ -79,7 +67,7 @@ export default function Form(props) {
           <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={validate}>Save</Button>
 
-         {/*  <Button confirm onClick={(student,interviewer)=> onSave(student, interviewer)}>Save</Button> */}
+
         </section>
       </section>
     </main>
