@@ -20,7 +20,7 @@ export default function DayListItem(props) {
     
   };
 
-
+console.log('name-------------------->', name)
 
   //QUESTION: IS IT BETTER TO DO SHORT CIRCUIT EVAL? or a ternary
   //if you have two conditions with two outcomes, use ternary, if 
@@ -28,7 +28,7 @@ export default function DayListItem(props) {
   //if we deconstructed props above, can we writer setDay(name) below or do we need to do props.name, I'm guessing it's in the function/component scope so it's fine...
   //<li onClick={setDay}> using this still displays the click action in storybook
   return (
-    <li className={dayListClass} onClick={() => {setDay(name)}}>
+    <li className={dayListClass} data-testid="day" onClick={() => {setDay(name)}}>
       <h2 className="text--regular">{name}</h2> 
       <h3 className="text--light">{formatSpots(spots)} remaining</h3>
     </li>
